@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promesas Biblicas</title>
+</head>
+<body>
+
+<h1>Promesas Biblicas</h1>
+
+<div id="verse-container">
+    <p id="verse-text">Loading...</p>
+    <p id="verse-ref"></p>
+    <img id="verse-image" alt="Verse Image">
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Fetch random verse when the page is loaded
+        fetchRandomVerse();
+
+        // Add event listener to a button to fetch a new random verse on click
+        document.getElementById('fetch-button').addEventListener('click', fetchRandomVerse);
+    });
+
+    function fetchRandomVerse() {
+        // Make a GET request to your Flask API endpoint
+        fetch('http://127.0.0.1:5000/api/random-verse')
+            .then(response => response.json())
+            .then(data => {
+                // Update HTML elements with the received data
+                document.getElementById('verse-text').innerText = data.texto;
+                document.getElementById('verse-ref').innerText = data.verso;
+                document.getElementById('verse-image').src = data.image_path;
+            })
+            .catch(error => console.error('Error fetching random verse:', error));
+    }
+</script>
+
+</body>
+</html>

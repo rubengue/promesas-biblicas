@@ -1,7 +1,7 @@
 FROM python:3.10-bullseye
 
-RUN pip install openpyxl flask flask_cors
 COPY . /
+RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
